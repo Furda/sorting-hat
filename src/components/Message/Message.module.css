@@ -1,0 +1,14 @@
+.message {
+  display: flex;
+  align-self: flex-end;
+  background-color: #2105cd;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  width: fit-content;
+  max-width: 70%;
+}
+
+.message .response {
+  background-color: #00a3ff;
+  align-self: flex-start;
+}

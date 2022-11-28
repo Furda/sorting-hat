@@ -1,6 +1,7 @@
 import ProfilePicture from "./components/ProfilePicture/ProfilePicture";
 import Header from "./components/Header/Header";
 import Input from "./components/Input/Input";
+import MessageList from "./components/Message/MessageList";
 import "./App.css";
 
 function App() {
@@ -11,6 +12,7 @@ function App() {
         <ProfilePicture name={name} />
         <h2>{name}</h2>
       </Header>
+      <MessageList />
       <Input placeholder="Message" />
     </div>
   );
