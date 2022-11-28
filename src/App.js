@@ -1,16 +1,15 @@
-import logo from "./logo.svg";
+import ProfilePicture from "./components/ProfilePicture/ProfilePicture";
+import Header from "./components/Header/Header";
 import "./App.css";
 
 function App() {
+  const name = "Fernando";
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <p>Sorting Hat Project</p>
-      </header>
+      <Header>
+        <ProfilePicture name={name} />
+        <h2>{name}</h2>
+      </Header>
     </div>
   );
 }

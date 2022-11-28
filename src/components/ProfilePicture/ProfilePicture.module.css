@@ -1,0 +1,11 @@
+.profilePicture {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 100%;
+  font-size: 32px;
+  color: #fff;
+  background: linear-gradient(180deg, #ff0000 0%, #ff8181 100%);
+}
