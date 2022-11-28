@@ -1,0 +1,15 @@
+.inputContainer {
+  display: flex;
+  margin-top: auto;
+  margin-bottom: 0.5rem;
+  border-radius: 8px;
+  background-color: #212121;
+}
+
+.input {
+  background-color: transparent;
+  border: none;
+  color: #fff;
+  width: 100%;
+  padding: 1rem;
+}
