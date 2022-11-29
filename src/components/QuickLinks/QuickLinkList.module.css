@@ -1,0 +1,7 @@
+.quickLinkList {
+  display: flex;
+  margin-top: auto;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+}

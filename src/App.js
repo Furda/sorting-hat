@@ -2,7 +2,8 @@ import ProfilePicture from "./components/ProfilePicture/ProfilePicture";
 import Header from "./components/Header/Header";
 import Chat from "./components/Chat/Chat";
 import Input from "./components/Input/Input";
-import MessageList from "./components/Message/MessageList";
+import MessageList from "./components/Messages/MessageList";
+import QuickLinkList from "./components/QuickLinks/QuickLinkList";
 import "./App.css";
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
       </Header>
       <Chat>
         <MessageList />
+        <QuickLinkList />
         <Input placeholder="Message" />
       </Chat>
     </div>

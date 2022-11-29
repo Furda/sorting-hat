@@ -1,6 +1,6 @@
 .inputContainer {
   display: flex;
-  margin-top: auto;
+  /* margin-top: auto; */
   margin-bottom: 0.5rem;
   border-radius: 8px;
   background-color: #212121;
