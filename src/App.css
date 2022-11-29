@@ -1,11 +1,4 @@
 body {
   background-image: url(../public/images/tile_background.png);
-}
-
-.App {
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
   color: #fff;
-  padding: 0 1rem;
 }
