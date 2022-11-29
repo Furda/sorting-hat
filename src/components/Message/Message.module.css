@@ -29,21 +29,23 @@
 .message.fromBot::before {
   border-bottom-left-radius: 0.8rem 0.7rem;
   border-right: 0.5rem solid #2105cd;
-  right: -0.1rem;
-  transform: translate(0, -0.1rem);
+  right: -0.05rem;
+  bottom: -0.11rem;
   transform: rotate(-25deg);
-}
-
-.message.fromBot::after {
-  background-color: transparent;
-  border-bottom-left-radius: 0.5rem;
-  right: -40px;
-  transform: translate(-30px, -2px);
-  width: 10px;
 }
 
 /* User message*/
 .message.fromUser {
-  background-color: #00a3ff;
   align-self: flex-start;
+  background-color: #00a3ff;
+  color: #fff;
+  border-bottom-left-radius: 0;
+}
+
+.message.fromUser::before {
+  border-bottom-right-radius: 0.8rem 1rem;
+  border-right: 0.5rem solid #00a3ff;
+  bottom: -0.11rem;
+  left: -0.05rem;
+  transform: rotate(25deg);
 }
