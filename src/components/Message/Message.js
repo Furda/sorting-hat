@@ -2,7 +2,9 @@ import React from "react";
 import styles from "./Message.module.css";
 
 const Message = (props) => {
-  return <div className={styles.message}>{props.children}</div>;
+  return (
+    <p className={`${styles.message} ${styles.fromBot}`}>{props.children}</p>
+  );
 };
 
 export default Message;

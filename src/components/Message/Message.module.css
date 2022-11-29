@@ -1,14 +1,49 @@
 .message {
   display: flex;
-  align-self: flex-end;
   background-color: #2105cd;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 0.875rem;
+  margin: 0;
   border-radius: 8px;
   width: fit-content;
   max-width: 70%;
+  line-height: 1.25;
+  position: relative;
+  word-wrap: break-word;
 }
 
-.message .response {
+.message::before,
+.message::after {
+  bottom: -0.1rem;
+  content: "";
+  height: 1rem;
+  position: absolute;
+}
+
+.message.fromBot {
+  align-self: flex-end;
+  background-color: #2105cd;
+  color: #fff;
+  border-bottom-right-radius: 0;
+}
+
+.message.fromBot::before {
+  border-bottom-left-radius: 0.8rem 0.7rem;
+  border-right: 0.5rem solid #2105cd;
+  right: -0.1rem;
+  transform: translate(0, -0.1rem);
+  transform: rotate(-25deg);
+}
+
+.message.fromBot::after {
+  background-color: transparent;
+  border-bottom-left-radius: 0.5rem;
+  right: -40px;
+  transform: translate(-30px, -2px);
+  width: 10px;
+}
+
+/* User message*/
+.message.fromUser {
   background-color: #00a3ff;
   align-self: flex-start;
 }
