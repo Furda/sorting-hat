@@ -4,6 +4,7 @@ import Chat from "./components/Chat/Chat";
 import Input from "./components/Input/Input";
 import MessageList from "./components/Messages/MessageList";
 import QuickLinkList from "./components/QuickLinks/QuickLinkList";
+import Footer from "./components/utils/Footer/Footer";
 import "./App.css";
 
 function App() {
@@ -16,8 +17,10 @@ function App() {
       </Header>
       <Chat>
         <MessageList />
-        <QuickLinkList />
-        <Input placeholder="Message" />
+        <Footer>
+          <QuickLinkList />
+          <Input placeholder="Message" />
+        </Footer>
       </Chat>
     </div>
   );
