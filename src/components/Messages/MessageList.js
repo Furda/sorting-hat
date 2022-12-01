@@ -34,25 +34,11 @@ const MessageList = (props) => {
   }, [messages, props]);
 
   return (
-    <>
+    <div className={styles.messageList}>
       {messages.map((message) => (
         <Message key={Math.random()}>{message}</Message>
       ))}
-
-      {/* {props.hasAnswered && (
-        <div className={styles.MessageList}>
-          {props.questions.map((question) => {
-            return <Message key={Math.random()}>{question.title}</Message>;
-          })} 
-
-        {props.questions.map((question) => {
-            console.log(question);
-            question.answers.map((answer) => {
-              return <Message key={Math.random()}>{answer.title}</Message>;
-            })}
-        </div>
-      )} */}
-    </>
+    </div>
   );
 };
 
