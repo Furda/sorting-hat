@@ -7,7 +7,7 @@ const QuickLinkList = (props) => {
   return (
     <div className={styles.quickLinkList}>
       {answerOptions.map((answer) => (
-        <QuickLink>{answer}</QuickLink>
+        <QuickLink key={Math.random()}>{answer}</QuickLink>
       ))}
     </div>
   );

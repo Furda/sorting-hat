@@ -14,6 +14,7 @@ function App() {
 
   const [questions] = useState(QuestionsJSON);
   const [hasAnswered, setHasAnswer] = useState(true);
+  const [questionIndex, setQuestionIndex] = useState(0);
 
   useEffect(() => {
     console.log(questions);
@@ -21,6 +22,10 @@ function App() {
 
   const updateHasAnswerHandler = (updatedHasAnswer) => {
     setHasAnswer(updatedHasAnswer);
+  };
+
+  const updateQuestionIndexHandler = () => {
+    setQuestionIndex(questionIndex++);
   };
 
   return (
@@ -33,12 +38,14 @@ function App() {
         <MessageList
           questions={questions}
           hasAnswered={hasAnswered}
-          updatedHasAnswer={updateHasAnswerHandler}
+          updatedHasAnswered={updateHasAnswerHandler}
+          questionIndex={questionIndex}
+          updateQuestionIndex={updateQuestionIndexHandler}
         />
         <Footer>
           <QuickLinkList
             hasAnswered={hasAnswered}
-            updatedHasAnswer={updateHasAnswerHandler}
+            updatedHasAnswered={updateHasAnswerHandler}
           />
           <Input placeholder="Message" />
         </Footer>

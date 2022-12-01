@@ -2,7 +2,7 @@
   display: flex;
   background-color: #2105cd;
   padding: 0.5rem 0.875rem;
-  margin: 0;
+  margin: 0.7rem 0;
   border-radius: 8px;
   width: fit-content;
   max-width: 70%;
@@ -20,32 +20,33 @@
 }
 
 .message.fromBot {
-  align-self: flex-end;
-  background-color: #2105cd;
-  color: #fff;
-  border-bottom-right-radius: 0;
-}
-
-.message.fromBot::before {
-  border-bottom-left-radius: 0.8rem 0.7rem;
-  border-right: 0.5rem solid #2105cd;
-  right: -0.05rem;
-  bottom: -0.11rem;
-  transform: rotate(-25deg);
-}
-
-/* User message*/
-.message.fromUser {
   align-self: flex-start;
-  background-color: #00a3ff;
+  background-color: #2105cd;
   color: #fff;
   border-bottom-left-radius: 0;
 }
 
-.message.fromUser::before {
+.message.fromBot::before {
   border-bottom-right-radius: 0.8rem 1rem;
-  border-right: 0.5rem solid #00a3ff;
+  border-right: 0.5rem solid #2105cd;
   bottom: -0.11rem;
   left: -0.05rem;
   transform: rotate(25deg);
+}
+
+/* User message*/
+
+.message.fromUser {
+  align-self: flex-end;
+  background-color: #00a3ff;
+  color: #fff;
+  border-bottom-right-radius: 0;
+}
+
+.message.fromUser::before {
+  border-bottom-left-radius: 0.8rem 0.7rem;
+  border-right: 0.5rem solid #00a3ff;
+  right: -0.05rem;
+  bottom: -0.11rem;
+  transform: rotate(-25deg);
 }
