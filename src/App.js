@@ -10,8 +10,7 @@ import "./App.css";
 import QuestionsJSON from "./sorting_hat.json";
 
 function App() {
-  const name = "Fernando"; // temp variable
-
+  const [name, setName] = useState("Fernando");
   const [questions] = useState(QuestionsJSON);
   const [hasAnswered, setHasAnswer] = useState(true);
   const [questionIndex, setQuestionIndex] = useState(0);
@@ -20,12 +19,16 @@ function App() {
     console.log(questions);
   }, [questions]);
 
+  const updateNameHandler = (newName) => {
+    setName(newName);
+  };
+
   const updateHasAnswerHandler = (updatedHasAnswer) => {
     setHasAnswer(updatedHasAnswer);
   };
 
   const updateQuestionIndexHandler = () => {
-    setQuestionIndex(questionIndex++);
+    setQuestionIndex((prevState) => prevState++);
   };
 
   return (
@@ -38,15 +41,20 @@ function App() {
         <MessageList
           questions={questions}
           hasAnswered={hasAnswered}
-          updatedHasAnswered={updateHasAnswerHandler}
           questionIndex={questionIndex}
+          updatedHasAnswered={updateHasAnswerHandler}
           updateQuestionIndex={updateQuestionIndexHandler}
         />
         <Footer>
-          <QuickLinkList
-            hasAnswered={hasAnswered}
-            updatedHasAnswered={updateHasAnswerHandler}
-          />
+          {!hasAnswered && (
+            <QuickLinkList
+              answers={questions[questionIndex].answers}
+              hasAnswered={hasAnswered}
+              questionIndex={questionIndex}
+              updatedHasAnswered={updateHasAnswerHandler}
+              updateQuestionIndex={updateQuestionIndexHandler}
+            />
+          )}
           <Input placeholder="Message" />
         </Footer>
       </Chat>

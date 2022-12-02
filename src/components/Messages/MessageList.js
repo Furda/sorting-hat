@@ -5,14 +5,8 @@ import styles from "./MessageList.module.css";
 const MessageList = (props) => {
   const [messages, setMessages] = useState([]);
 
-  // const [answerLetter] = useState(["A", "B", "C", "D", "E", "F", "G", "H"]);
+  // const [prefix] = useState(["A", "B", "C", "D", "E", "F", "G", "H"]);
   // let answerLetterIndex;
-
-  // try using functions and save the result in a variable to show the answers and even questions
-
-  // 1. greeting (explain the game)
-  // 2. get answer by quick link
-  // 3. ask first question
 
   const addMessage = (newMessage) => {
     setMessages((prevState) => [...prevState, newMessage]);
@@ -21,12 +15,10 @@ const MessageList = (props) => {
   useEffect(() => {
     if (props.hasAnswered) {
       const question = props.questions[props.questionIndex];
-      console.log(question.title);
-      addMessage(question.title);
+      addMessage("Question: " + question.title);
       question.answers.map((answer) => {
-        console.log(answer.title);
         addMessage(answer.title);
-        return answer.title;
+        return answer;
       });
 
       props.updatedHasAnswered(false);

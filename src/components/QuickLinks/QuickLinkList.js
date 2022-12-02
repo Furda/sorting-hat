@@ -1,13 +1,33 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import QuickLink from "./QuickLink";
 import styles from "./QuickLinkList.module.css";
 
 const QuickLinkList = (props) => {
-  const answerOptions = ["A", "B", "C", "D"];
+  const [answerOptions, setAnswerOptions] = useState([]);
+
+  const addAnswerOption = (newAswerOption) => {
+    setAnswerOptions((prevState) => [...prevState, newAswerOption]);
+  };
+
+  const calculateScore = (scores) => {
+    // calculate scores
+  };
+
+  // Show answer options
+  useEffect(() => {
+    let letterCode = 65; // (65 = A) not using state because it is too slow in updating the state
+    props.answers.forEach(() => {
+      addAnswerOption(String.fromCharCode(letterCode));
+      letterCode++;
+    });
+  }, [props.answers]);
+
   return (
     <div className={styles.quickLinkList}>
       {answerOptions.map((answer) => (
-        <QuickLink key={Math.random()}>{answer}</QuickLink>
+        <QuickLink key={Math.random()} onClick={calculateScore}>
+          {answer}
+        </QuickLink>
       ))}
     </div>
   );
