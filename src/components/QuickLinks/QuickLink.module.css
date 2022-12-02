@@ -5,4 +5,12 @@
   border-radius: 8px;
   justify-content: center;
   font-size: 1.5rem;
+  cursor: pointer;
+  border: 0;
+  color: #fff;
+}
+
+.quickLink:hover {
+  background-color: #0682ca;
+  transform: scale(1.1);
 }

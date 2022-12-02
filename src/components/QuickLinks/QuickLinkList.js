@@ -11,13 +11,17 @@ const QuickLinkList = (props) => {
 
   const calculateScore = (scores) => {
     // calculate scores
+    props.updateScoreHandler(scores);
   };
 
   // Show answer options
   useEffect(() => {
     let letterCode = 65; // (65 = A) not using state because it is too slow in updating the state
-    props.answers.forEach(() => {
-      addAnswerOption(String.fromCharCode(letterCode));
+    props.answers.forEach((answer, index) => {
+      addAnswerOption({
+        letter: String.fromCharCode(letterCode),
+        index: index,
+      });
       letterCode++;
     });
   }, [props.answers]);
@@ -25,8 +29,13 @@ const QuickLinkList = (props) => {
   return (
     <div className={styles.quickLinkList}>
       {answerOptions.map((answer) => (
-        <QuickLink key={Math.random()} onClick={calculateScore}>
-          {answer}
+        <QuickLink
+          key={Math.random()}
+          onClick={() => {
+            calculateScore(props.answers[answer.index].scores);
+          }}
+        >
+          {answer.letter}
         </QuickLink>
       ))}
     </div>

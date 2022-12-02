@@ -10,10 +10,17 @@ import "./App.css";
 import QuestionsJSON from "./sorting_hat.json";
 
 function App() {
+  const [questions] = useState(QuestionsJSON); // Constant (Not changing)
   const [name, setName] = useState("Fernando");
-  const [questions] = useState(QuestionsJSON);
+
   const [hasAnswered, setHasAnswer] = useState(true);
   const [questionIndex, setQuestionIndex] = useState(0);
+  const [score, setScore] = useState({
+    g: 0,
+    r: 0,
+    h: 0,
+    s: 0,
+  });
 
   useEffect(() => {
     console.log(questions);
@@ -31,6 +38,28 @@ function App() {
     setQuestionIndex((prevState) => prevState++);
   };
 
+  useEffect(() => {
+    console.log("score", score);
+  }, [score]);
+
+  const updateScoreHandler = (addedScore) => {
+    console.log("addedScore", addedScore);
+    setScore((prevState) => {
+      const newScore = { ...prevState };
+      newScore.g = newScore.g + addedScore.g;
+      newScore.h = newScore.h + addedScore.h;
+      newScore.r = newScore.r + addedScore.r;
+      newScore.s = newScore.s + addedScore.s;
+      return newScore;
+      // return {
+      //   ...(prevState.g + addedScore.g),
+      //   ...(prevState.h + addedScore.h),
+      //   ...(prevState.r + addedScore.r),
+      //   ...(prevState.s + addedScore.s),
+      // };
+    });
+  };
+
   return (
     <div className="App">
       <Header>
@@ -44,6 +73,7 @@ function App() {
           questionIndex={questionIndex}
           updatedHasAnswered={updateHasAnswerHandler}
           updateQuestionIndex={updateQuestionIndexHandler}
+          score={score}
         />
         <Footer>
           {!hasAnswered && (
@@ -53,6 +83,7 @@ function App() {
               questionIndex={questionIndex}
               updatedHasAnswered={updateHasAnswerHandler}
               updateQuestionIndex={updateQuestionIndexHandler}
+              updateScoreHandler={updateScoreHandler}
             />
           )}
           <Input placeholder="Message" />
