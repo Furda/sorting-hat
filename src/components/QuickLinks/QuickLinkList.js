@@ -10,8 +10,6 @@ const QuickLinkList = (props) => {
   };
 
   const sendResponseMessage = (answer, index) => {
-    console.log("answer", answer);
-    console.log("index", index);
     props.addMessage({
       message: answerOptions[index].letter + ". " + answer.title,
       from: "user",

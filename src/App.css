@@ -1,11 +1,6 @@
-/* body {
-  background-image: url(../public/images/tile_background.png);
-  color: #fff;
-  position: relative;
-} */
-
 .App {
   display: flex;
   flex-direction: column;
   height: 100vh;
+  max-height: 100vh;
 }

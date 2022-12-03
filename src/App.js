@@ -23,7 +23,7 @@ function App() {
     s: 0,
   });
 
-  // Remvove empty messages
+  // Development notes
   useEffect(() => {
     console.log(questions);
   }, [questions]);
@@ -48,12 +48,7 @@ function App() {
     console.log(questionIndex);
   };
 
-  useEffect(() => {
-    console.log("score", score);
-  }, [score]);
-
   const updateScoreHandler = (addedScore) => {
-    console.log("addedScore", addedScore);
     setScore((prevState) => {
       const newScore = { ...prevState };
       newScore.g += addedScore.g;
@@ -61,12 +56,6 @@ function App() {
       newScore.r += addedScore.r;
       newScore.s += addedScore.s;
       return newScore;
-      // return {
-      //   ...(prevState.g + addedScore.g),
-      //   ...(prevState.h + addedScore.h),
-      //   ...(prevState.r + addedScore.r),
-      //   ...(prevState.s + addedScore.s),
-      // };
     });
   };
 
@@ -87,22 +76,22 @@ function App() {
           addMessage={addMessageHandler}
           messages={messages}
         />
-        <Footer>
-          {!hasAnswered && (
-            <QuickLinkList
-              answers={questions[questionIndex].answers}
-              hasAnswered={hasAnswered}
-              questionIndex={questionIndex}
-              updatedHasAnswered={updateHasAnswerHandler}
-              updateQuestionIndex={updateQuestionIndexHandler}
-              updateScoreHandler={updateScoreHandler}
-              addMessage={addMessageHandler}
-              messages={messages}
-            />
-          )}
-          <Input placeholder="Message" />
-        </Footer>
       </Chat>
+      <Footer>
+        {!hasAnswered && (
+          <QuickLinkList
+            answers={questions[questionIndex].answers}
+            hasAnswered={hasAnswered}
+            questionIndex={questionIndex}
+            updatedHasAnswered={updateHasAnswerHandler}
+            updateQuestionIndex={updateQuestionIndexHandler}
+            updateScoreHandler={updateScoreHandler}
+            addMessage={addMessageHandler}
+            messages={messages}
+          />
+        )}
+        <Input placeholder="Message" />
+      </Footer>
     </div>
   );
 }
