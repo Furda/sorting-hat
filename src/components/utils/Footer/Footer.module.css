@@ -1,6 +1,8 @@
 .footer {
-  margin-top: auto;
-  margin-bottom: 1rem;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  padding-bottom: 1rem;
   display: flex;
   flex-direction: column;
   row-gap: 1rem;

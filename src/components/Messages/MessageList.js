@@ -3,32 +3,34 @@ import Message from "./Message";
 import styles from "./MessageList.module.css";
 
 const MessageList = (props) => {
-  const [messages, setMessages] = useState([]);
-
   // const [prefix] = useState(["A", "B", "C", "D", "E", "F", "G", "H"]);
   // let answerLetterIndex;
 
-  const addMessage = (newMessage) => {
-    setMessages((prevState) => [...prevState, newMessage]);
-  };
-
+  // show question with answers
   useEffect(() => {
     if (props.hasAnswered) {
+      // Display question
       const question = props.questions[props.questionIndex];
-      addMessage("Question: " + question.title);
+      let newMessage = { message: "Question: " + question.title, from: "bot" };
+      props.addMessage(newMessage);
+
+      // Display question's answer options
       question.answers.map((answer) => {
-        addMessage(answer.title);
-        return answer;
+        newMessage = { message: answer.title, from: "bot" };
+        props.addMessage(newMessage);
+        return newMessage;
       });
 
       props.updatedHasAnswered(false);
     }
-  }, [messages, props]);
+  }, [props]);
 
   return (
     <div className={styles.messageList}>
-      {messages.map((message) => (
-        <Message key={Math.random()}>{message}</Message>
+      {props.messages.map((message) => (
+        <Message key={Math.random()} from={message.from}>
+          {message.message}
+        </Message>
       ))}
     </div>
   );

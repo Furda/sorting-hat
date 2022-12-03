@@ -9,9 +9,20 @@ const QuickLinkList = (props) => {
     setAnswerOptions((prevState) => [...prevState, newAswerOption]);
   };
 
-  const calculateScore = (scores) => {
-    // calculate scores
-    props.updateScoreHandler(scores);
+  const sendResponseMessage = (answer, index) => {
+    console.log("answer", answer);
+    console.log("index", index);
+    props.addMessage({
+      message: answerOptions[index].letter + ". " + answer.title,
+      from: "user",
+    });
+  };
+
+  const quickLinkOnclickHandler = (answer, index) => {
+    sendResponseMessage(answer, index);
+    props.updateScoreHandler(answer.scores);
+    props.updatedHasAnswered(true);
+    props.updateQuestionIndex();
   };
 
   // Show answer options
@@ -28,11 +39,11 @@ const QuickLinkList = (props) => {
 
   return (
     <div className={styles.quickLinkList}>
-      {answerOptions.map((answer) => (
+      {answerOptions.map((answer, index) => (
         <QuickLink
           key={Math.random()}
           onClick={() => {
-            calculateScore(props.answers[answer.index].scores);
+            quickLinkOnclickHandler(props.answers[answer.index], index);
           }}
         >
           {answer.letter}

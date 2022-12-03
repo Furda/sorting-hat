@@ -15,6 +15,7 @@ function App() {
 
   const [hasAnswered, setHasAnswer] = useState(true);
   const [questionIndex, setQuestionIndex] = useState(0);
+  const [messages, setMessages] = useState([]);
   const [score, setScore] = useState({
     g: 0,
     r: 0,
@@ -22,6 +23,7 @@ function App() {
     s: 0,
   });
 
+  // Remvove empty messages
   useEffect(() => {
     console.log(questions);
   }, [questions]);
@@ -34,8 +36,16 @@ function App() {
     setHasAnswer(updatedHasAnswer);
   };
 
+  const addMessageHandler = (newMessage) => {
+    setMessages((prevState) => [
+      ...prevState,
+      { message: newMessage.message, from: newMessage.from },
+    ]);
+  };
+
   const updateQuestionIndexHandler = () => {
-    setQuestionIndex((prevState) => prevState++);
+    setQuestionIndex((prevState) => prevState + 1);
+    console.log(questionIndex);
   };
 
   useEffect(() => {
@@ -46,10 +56,10 @@ function App() {
     console.log("addedScore", addedScore);
     setScore((prevState) => {
       const newScore = { ...prevState };
-      newScore.g = newScore.g + addedScore.g;
-      newScore.h = newScore.h + addedScore.h;
-      newScore.r = newScore.r + addedScore.r;
-      newScore.s = newScore.s + addedScore.s;
+      newScore.g += addedScore.g;
+      newScore.h += addedScore.h;
+      newScore.r += addedScore.r;
+      newScore.s += addedScore.s;
       return newScore;
       // return {
       //   ...(prevState.g + addedScore.g),
@@ -74,6 +84,8 @@ function App() {
           updatedHasAnswered={updateHasAnswerHandler}
           updateQuestionIndex={updateQuestionIndexHandler}
           score={score}
+          addMessage={addMessageHandler}
+          messages={messages}
         />
         <Footer>
           {!hasAnswered && (
@@ -84,6 +96,8 @@ function App() {
               updatedHasAnswered={updateHasAnswerHandler}
               updateQuestionIndex={updateQuestionIndexHandler}
               updateScoreHandler={updateScoreHandler}
+              addMessage={addMessageHandler}
+              messages={messages}
             />
           )}
           <Input placeholder="Message" />

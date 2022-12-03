@@ -1,7 +1,8 @@
-body {
+/* body {
   background-image: url(../public/images/tile_background.png);
   color: #fff;
-}
+  position: relative;
+} */
 
 .App {
   display: flex;

@@ -3,13 +3,14 @@ import styles from "./Message.module.css";
 
 const Message = (props) => {
   return (
-    <p className={`${styles.message} ${styles.fromBot}`}>{props.children}</p>
+    <p
+      className={`${styles.message} ${
+        props.from === "bot" ? styles.fromBot : styles.fromUser
+      }`}
+    >
+      {props.children}
+    </p>
   );
 };
 
 export default Message;
-
-// <>
-//   <p className={`${styles.message} ${styles.fromBot}`}>{props.children}</p>
-//   <p className={`${styles.message} ${styles.fromUser}`}>{props.children}</p>
-// </>
