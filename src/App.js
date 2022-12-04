@@ -12,9 +12,10 @@ import QuestionsJSON from "./sorting_hat.json";
 
 function App() {
   const [questions] = useState(QuestionsJSON); // Constant (Not changing)
-  const [name, setName] = useState("Fernando");
+  const [name, setName] = useState("User's name");
 
   const [hasAnswered, setHasAnswer] = useState(true);
+  const [hasStarted, setHasStarted] = useState(false);
   const [questionIndex, setQuestionIndex] = useState(0);
   const [messages, setMessages] = useState([]);
   const [scores, setScores] = useState({
@@ -23,15 +24,6 @@ function App() {
     h: 0,
     s: 0,
   });
-
-  // Development notes
-  useEffect(() => {
-    console.log(questions);
-  }, [questions]);
-
-  const updateNameHandler = (newName) => {
-    setName(newName);
-  };
 
   const updateHasAnswerHandler = (updatedHasAnswer) => {
     setHasAnswer(updatedHasAnswer);
@@ -59,6 +51,14 @@ function App() {
     });
   };
 
+  const sendInputMessageHnadler = (message) => {
+    if (!hasStarted) {
+      setName(message);
+      addMessageHandler({ message: message, from: "user" });
+      setHasStarted(true);
+    }
+  };
+
   return (
     <div className="App">
       <Header>
@@ -69,6 +69,7 @@ function App() {
       <Chat>
         <MessageList
           questions={questions}
+          hasStarted={hasStarted}
           hasAnswered={hasAnswered}
           questionIndex={questionIndex}
           updatedHasAnswered={updateHasAnswerHandler}
@@ -90,7 +91,7 @@ function App() {
             messages={messages}
           />
         )}
-        <Input placeholder="Message" />
+        <Input placeholder="Message" onSend={sendInputMessageHnadler} />
       </Footer>
     </div>
   );
