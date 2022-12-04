@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import Message from "./Message";
 import styles from "./MessageList.module.css";
 
@@ -21,11 +21,13 @@ const MessageList = (props) => {
 
   // show question with answers
   useEffect(() => {
-    if (!props.hasStarted) {
+    if (!props.hasStarted || props.hasFinished) {
       return;
     }
 
     if (props.hasAnswered) {
+      console.log("questionIndex", props.questionIndex);
+      console.log(props.hasFinished);
       // Display question
       const question = props.questions[props.questionIndex];
       let newMessage = { message: "Question: " + question.title, from: "bot" };
@@ -45,7 +47,7 @@ const MessageList = (props) => {
 
       props.updatedHasAnswered(false);
     }
-  }, [props]);
+  }, [props.hasAnswered, props.messages, props.questions, props.questionIndex]);
 
   return (
     <div className={styles.messageList}>

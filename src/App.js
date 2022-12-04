@@ -11,19 +11,33 @@ import "./App.css";
 import QuestionsJSON from "./sorting_hat.json";
 
 function App() {
-  const [questions] = useState(QuestionsJSON); // Constant (Not changing)
+  const [questions] = useState(QuestionsJSON);
   const [name, setName] = useState("User's name");
 
-  const [hasAnswered, setHasAnswer] = useState(true);
   const [hasStarted, setHasStarted] = useState(false);
+  const [hasAnswered, setHasAnswer] = useState(true);
+  const [hasFinished, setHasFinished] = useState(false);
+
   const [questionIndex, setQuestionIndex] = useState(0);
   const [messages, setMessages] = useState([]);
-  const [scores, setScores] = useState({
-    g: 0,
-    r: 0,
-    h: 0,
-    s: 0,
-  });
+  const [houses, setHouses] = useState([
+    {
+      house: "Griffyndor",
+      score: 0,
+    },
+    {
+      house: "Hufflepuff",
+      score: 0,
+    },
+    {
+      house: "Ravenclaw",
+      score: 0,
+    },
+    {
+      house: "Slytherin",
+      score: 0,
+    },
+  ]);
 
   const updateHasAnswerHandler = (updatedHasAnswer) => {
     setHasAnswer(updatedHasAnswer);
@@ -40,14 +54,18 @@ function App() {
     setQuestionIndex((prevState) => prevState + 1);
   };
 
-  const updateScoresHandler = (addedScores) => {
-    setScores((prevState) => {
-      const newScores = { ...prevState };
-      newScores.g += addedScores.g;
-      newScores.h += addedScores.h;
-      newScores.r += addedScores.r;
-      newScores.s += addedScores.s;
-      return newScores;
+  const updateHousesHandler = (addedScores) => {
+    setHouses((prevState) => {
+      const initialHouse = Object.keys(addedScores);
+      const newScores = [...prevState];
+      let index = -1;
+      return newScores.map((house) => {
+        index += 1;
+        return {
+          house: house.house,
+          score: house.score + addedScores[initialHouse[index]],
+        };
+      });
     });
   };
 
@@ -59,21 +77,38 @@ function App() {
     }
   };
 
+  // Check if there are not more questions
+  useEffect(() => {
+    if (questionIndex >= questions.length - 1) {
+      const winningHouse = houses.reduce((winningHouse, nextHouse) =>
+        winningHouse.score > nextHouse.score ? winningHouse : nextHouse
+      );
+
+      console.log("winningHouse", winningHouse);
+
+      setHasFinished(true);
+      addMessageHandler({
+        message: "Your house is " + winningHouse.house,
+        from: "bot",
+      });
+    }
+  }, [questionIndex, questions.length, houses]);
+
   return (
     <div className="App">
       <Header>
         <ProfilePicture name={name} />
         <h2>{name}</h2>
       </Header>
-      <ScoreList scores={scores} />
+      <ScoreList houses={houses} />
       <Chat>
         <MessageList
           questions={questions}
           hasStarted={hasStarted}
           hasAnswered={hasAnswered}
+          hasFinished={hasFinished}
           questionIndex={questionIndex}
           updatedHasAnswered={updateHasAnswerHandler}
-          updateQuestionIndex={updateQuestionIndexHandler}
           addMessage={addMessageHandler}
           messages={messages}
         />
@@ -86,7 +121,7 @@ function App() {
             questionIndex={questionIndex}
             updatedHasAnswered={updateHasAnswerHandler}
             updateQuestionIndex={updateQuestionIndexHandler}
-            updateScoreHandler={updateScoresHandler}
+            updateScoreHandler={updateHousesHandler}
             addMessage={addMessageHandler}
             messages={messages}
           />
