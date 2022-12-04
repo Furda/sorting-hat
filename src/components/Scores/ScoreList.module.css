@@ -1,0 +1,7 @@
+.scoreList {
+  display: flex;
+  font-size: 0.8rem;
+  justify-content: space-between;
+  padding: 0.5rem 1rem;
+  background: #212121;
+}

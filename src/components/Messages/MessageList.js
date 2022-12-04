@@ -3,9 +3,6 @@ import Message from "./Message";
 import styles from "./MessageList.module.css";
 
 const MessageList = (props) => {
-  // const [prefix] = useState(["A", "B", "C", "D", "E", "F", "G", "H"]);
-  // let answerLetterIndex;
-
   // show question with answers
   useEffect(() => {
     if (props.hasAnswered) {
@@ -15,8 +12,13 @@ const MessageList = (props) => {
       props.addMessage(newMessage);
 
       // Display question's answer options
+      let letterCode = 65; // (65 = A) not using state because it is too slow in updating the state
       question.answers.map((answer) => {
-        newMessage = { message: answer.title, from: "bot" };
+        newMessage = {
+          message: String.fromCharCode(letterCode) + ". " + answer.title,
+          from: "bot",
+        };
+        letterCode++;
         props.addMessage(newMessage);
         return newMessage;
       });

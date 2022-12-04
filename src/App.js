@@ -6,6 +6,7 @@ import Input from "./components/Input/Input";
 import MessageList from "./components/Messages/MessageList";
 import QuickLinkList from "./components/QuickLinks/QuickLinkList";
 import Footer from "./components/utils/Footer/Footer";
+import ScoreList from "./components/Scores/ScoreList";
 import "./App.css";
 import QuestionsJSON from "./sorting_hat.json";
 
@@ -16,7 +17,7 @@ function App() {
   const [hasAnswered, setHasAnswer] = useState(true);
   const [questionIndex, setQuestionIndex] = useState(0);
   const [messages, setMessages] = useState([]);
-  const [score, setScore] = useState({
+  const [scores, setScores] = useState({
     g: 0,
     r: 0,
     h: 0,
@@ -45,17 +46,16 @@ function App() {
 
   const updateQuestionIndexHandler = () => {
     setQuestionIndex((prevState) => prevState + 1);
-    console.log(questionIndex);
   };
 
-  const updateScoreHandler = (addedScore) => {
-    setScore((prevState) => {
-      const newScore = { ...prevState };
-      newScore.g += addedScore.g;
-      newScore.h += addedScore.h;
-      newScore.r += addedScore.r;
-      newScore.s += addedScore.s;
-      return newScore;
+  const updateScoresHandler = (addedScores) => {
+    setScores((prevState) => {
+      const newScores = { ...prevState };
+      newScores.g += addedScores.g;
+      newScores.h += addedScores.h;
+      newScores.r += addedScores.r;
+      newScores.s += addedScores.s;
+      return newScores;
     });
   };
 
@@ -65,6 +65,7 @@ function App() {
         <ProfilePicture name={name} />
         <h2>{name}</h2>
       </Header>
+      <ScoreList scores={scores} />
       <Chat>
         <MessageList
           questions={questions}
@@ -72,7 +73,6 @@ function App() {
           questionIndex={questionIndex}
           updatedHasAnswered={updateHasAnswerHandler}
           updateQuestionIndex={updateQuestionIndexHandler}
-          score={score}
           addMessage={addMessageHandler}
           messages={messages}
         />
@@ -85,7 +85,7 @@ function App() {
             questionIndex={questionIndex}
             updatedHasAnswered={updateHasAnswerHandler}
             updateQuestionIndex={updateQuestionIndexHandler}
-            updateScoreHandler={updateScoreHandler}
+            updateScoreHandler={updateScoresHandler}
             addMessage={addMessageHandler}
             messages={messages}
           />
