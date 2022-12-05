@@ -7,6 +7,12 @@ const Input = (props) => {
   const inputRef = useRef(null);
 
   const onSendHandler = () => {
+    if (inputRef.current.value === "") {
+      // show error message
+      alert("Please enter a valid name");
+      return;
+    }
+
     props.onSend(inputRef.current.value);
 
     // Clear input

@@ -11,6 +11,7 @@ const MessageList = (props) => {
 
     // Send greeting messages
     props.addMessage({
+      id: Math.random(),
       message: "Welcome to the Sorting hat project!",
       from: "bot",
     });
@@ -30,13 +31,18 @@ const MessageList = (props) => {
       console.log(props.hasFinished);
       // Display question
       const question = props.questions[props.questionIndex];
-      let newMessage = { message: "Question: " + question.title, from: "bot" };
+      let newMessage = {
+        id: Math.random(),
+        message: "Question: " + question.title,
+        from: "bot",
+      };
       props.addMessage(newMessage);
 
       // Display question's answer options
       let letterCode = 65; // (65 = A) not using state because it is too slow in updating the state
       question.answers.map((answer) => {
         newMessage = {
+          id: Math.random(),
           message: String.fromCharCode(letterCode) + ". " + answer.title,
           from: "bot",
         };
@@ -52,7 +58,11 @@ const MessageList = (props) => {
   return (
     <div className={styles.messageList}>
       {props.messages.map((message) => (
-        <Message key={Math.random()} from={message.from}>
+        <Message
+          key={message.id}
+          from={message.from}
+          delayTimeInSeconds={props.delayTimeInSeconds}
+        >
           {message.message}
         </Message>
       ))}

@@ -12,6 +12,7 @@ import QuestionsJSON from "./sorting_hat.json";
 
 function App() {
   const [questions] = useState(QuestionsJSON);
+  const DELAY_TIME_IN_SECONDS = 1;
   const [name, setName] = useState("User's name");
 
   const [hasStarted, setHasStarted] = useState(false);
@@ -46,7 +47,7 @@ function App() {
   const addMessageHandler = (newMessage) => {
     setMessages((prevState) => [
       ...prevState,
-      { message: newMessage.message, from: newMessage.from },
+      { id: Math.random(), message: newMessage.message, from: newMessage.from },
     ]);
   };
 
@@ -72,7 +73,7 @@ function App() {
   const sendInputMessageHnadler = (message) => {
     if (!hasStarted) {
       setName(message);
-      addMessageHandler({ message: message, from: "user" });
+      addMessageHandler({ id: Math.random(), message: message, from: "user" });
       setHasStarted(true);
     }
   };
@@ -88,6 +89,7 @@ function App() {
 
       setHasFinished(true);
       addMessageHandler({
+        id: Math.random(),
         message: "Your house is " + winningHouse.house,
         from: "bot",
       });
@@ -111,6 +113,7 @@ function App() {
           updatedHasAnswered={updateHasAnswerHandler}
           addMessage={addMessageHandler}
           messages={messages}
+          delayTimeInSeconds={DELAY_TIME_IN_SECONDS}
         />
       </Chat>
       <Footer>
@@ -124,6 +127,7 @@ function App() {
             updateScoreHandler={updateHousesHandler}
             addMessage={addMessageHandler}
             messages={messages}
+            delayTimeInSeconds={DELAY_TIME_IN_SECONDS}
           />
         )}
         <Input placeholder="Message" onSend={sendInputMessageHnadler} />

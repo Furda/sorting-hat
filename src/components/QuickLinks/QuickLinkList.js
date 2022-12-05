@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useLayoutEffect, useState } from "react";
 import QuickLink from "./QuickLink";
 import styles from "./QuickLinkList.module.css";
 
 const QuickLinkList = (props) => {
   const [answerOptions, setAnswerOptions] = useState([]);
+  const [delayed, setDelayed] = useState(true);
 
   const addAnswerOption = (newAswerOption) => {
     setAnswerOptions((prevState) => [...prevState, newAswerOption]);
@@ -11,6 +12,7 @@ const QuickLinkList = (props) => {
 
   const sendResponseMessage = (answer, index) => {
     props.addMessage({
+      id: Math.random(),
       message: answerOptions[index].letter + ". " + answer.title,
       from: "user",
     });
@@ -23,8 +25,16 @@ const QuickLinkList = (props) => {
     props.updateQuestionIndex();
   };
 
+  useLayoutEffect(() => {
+    const timeout = setTimeout(
+      () => setDelayed(false),
+      props.delayTimeInSeconds * 1000
+    );
+    return () => clearTimeout(timeout);
+  }, []);
+
   // Show answer options
-  useEffect(() => {
+  useLayoutEffect(() => {
     let letterCode = 65; // (65 = A) not using state because it is too slow in updating the state
     props.answers.forEach((answer, index) => {
       addAnswerOption({
@@ -36,18 +46,20 @@ const QuickLinkList = (props) => {
   }, [props.answers]);
 
   return (
-    <div className={styles.quickLinkList}>
-      {answerOptions.map((answer, index) => (
-        <QuickLink
-          key={Math.random()}
-          onClick={() => {
-            quickLinkOnclickHandler(props.answers[answer.index], index);
-          }}
-        >
-          {answer.letter}
-        </QuickLink>
-      ))}
-    </div>
+    delayed || (
+      <div className={styles.quickLinkList}>
+        {answerOptions.map((answer, index) => (
+          <QuickLink
+            key={index}
+            onClick={() => {
+              quickLinkOnclickHandler(props.answers[answer.index], index);
+            }}
+          >
+            {answer.letter}
+          </QuickLink>
+        ))}
+      </div>
+    )
   );
 };
 
