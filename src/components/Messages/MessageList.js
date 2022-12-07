@@ -55,7 +55,7 @@ const MessageList = (props) => {
       question.answers.map((answer) => {
         newMessage = {
           id: Math.random(),
-          prefix: String.fromCharCode(letterCode) + ". ",
+          prefix: String.fromCharCode(letterCode) + ".",
           message: answer.title,
           from: "bot",
         };

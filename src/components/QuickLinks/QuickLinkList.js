@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import QuickLink from "./QuickLink";
 import styles from "./QuickLinkList.module.css";
 
@@ -29,7 +29,7 @@ const QuickLinkList = (props) => {
   };
 
   // Delayed showing the message to create the illusion of messaging
-  useLayoutEffect(() => {
+  useEffect(() => {
     const timeout = setTimeout(
       () => setDelayed(false),
       props.delayTimeInSeconds * 1000
@@ -39,7 +39,7 @@ const QuickLinkList = (props) => {
   }, []);
 
   // Show answer options
-  useLayoutEffect(() => {
+  useEffect(() => {
     let letterCode = 65; // (65 = A) not using state because it is too slow in updating the state
     props.answers.forEach((answer, index) => {
       addAnswerOption({
