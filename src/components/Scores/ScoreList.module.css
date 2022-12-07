@@ -1,7 +1,18 @@
 .scoreList {
   display: flex;
-  font-size: 0.8rem;
+  font-size: 1rem;
   justify-content: space-between;
   padding: 0.5rem 1rem;
+
   background: #212121;
+}
+
+.score {
+  color: #00a3ff;
+}
+
+@media (max-width: 330px) {
+  .scoreList {
+    font-size: 0.8rem;
+  }
 }

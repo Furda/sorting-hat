@@ -14,6 +14,7 @@ const Message = ({ from, prefix, children, delayTimeInSeconds }) => {
       delayTimeInSeconds * 1000
     );
     return () => clearTimeout(timeout);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -23,7 +24,7 @@ const Message = ({ from, prefix, children, delayTimeInSeconds }) => {
           from === "bot" ? styles.fromBot : styles.fromUser
         }`}
       >
-        <b>{prefix}&nbsp;</b>
+        {prefix && <b>{prefix}&nbsp;</b>}
         {children}
       </p>
     )

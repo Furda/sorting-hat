@@ -30,6 +30,7 @@ const MessageList = (props) => {
       message: "What is your name?",
       from: "bot",
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.hasStarted]);
 
   // show question with answers
@@ -65,6 +66,7 @@ const MessageList = (props) => {
 
       props.updatedHasAnswered(false);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.hasAnswered, props.messages, props.questions, props.questionIndex]);
 
   return (

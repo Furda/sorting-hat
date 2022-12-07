@@ -35,6 +35,7 @@ const QuickLinkList = (props) => {
       props.delayTimeInSeconds * 1000
     );
     return () => clearTimeout(timeout);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Show answer options
