@@ -3,6 +3,12 @@
   border-radius: 8px 2rem 2rem 8px;
   background-color: #212121;
   align-items: center;
+  border: 1px solid transparent;
+}
+
+.inputContainer:focus-within {
+  border: 1px solid #00a3ff;
+  transition: 0.4s;
 }
 
 .input {
@@ -11,6 +17,15 @@
   color: #fff;
   width: 100%;
   padding: 1rem;
+}
+
+.input:focus {
+  outline: none;
+}
+
+.input:focus + .sendIconConteiner {
+  transition: 0.4s;
+  box-shadow: 0 0 0.5rem 0.2rem #00a2ff86;
 }
 
 .sendIconConteiner {
@@ -22,7 +37,7 @@
   align-items: center;
   justify-content: center;
   border: 1px solid #00a3ff;
-  box-shadow: 0 0 0.5rem 0.2rem #00a2ff86;
+
   cursor: pointer;
 }
 
