@@ -19,12 +19,16 @@ const QuickLinkList = (props) => {
   };
 
   const quickLinkOnclickHandler = (answer, index) => {
+    if (props.questionIndex + 1 >= props.questionsLength) {
+      props.updateHasFinished(true);
+    }
     sendResponseMessage(answer, index);
     props.updateScoreHandler(answer.scores);
     props.updatedHasAnswered(true);
     props.updateQuestionIndex();
   };
 
+  // Delayed showing the message to create the illusion of messaging
   useLayoutEffect(() => {
     const timeout = setTimeout(
       () => setDelayed(false),

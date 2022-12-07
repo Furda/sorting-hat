@@ -25,6 +25,7 @@ const Input = (props) => {
         ref={inputRef}
         className={styles.input}
         placeholder={props.placeholder}
+        autoFocus
       ></input>
       <div className={styles.sendIconConteiner} onClick={onSendHandler}>
         <FontAwesomeIcon className={styles.sendIcon} icon={faPaperPlane} />

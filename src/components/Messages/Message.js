@@ -1,7 +1,7 @@
 import React, { useState, useLayoutEffect } from "react";
 import styles from "./Message.module.css";
 
-const Message = ({ from, children, delayTimeInSeconds }) => {
+const Message = ({ from, prefix, children, delayTimeInSeconds }) => {
   const [delayed, setDelayed] = useState(true);
 
   useLayoutEffect(() => {
@@ -23,6 +23,7 @@ const Message = ({ from, children, delayTimeInSeconds }) => {
           from === "bot" ? styles.fromBot : styles.fromUser
         }`}
       >
+        <b>{prefix}&nbsp;</b>
         {children}
       </p>
     )

@@ -44,10 +44,19 @@ function App() {
     setHasAnswer(updatedHasAnswer);
   };
 
+  const updateHasFinished = (updateHasFinished) => {
+    setHasFinished(updateHasFinished);
+  };
+
   const addMessageHandler = (newMessage) => {
     setMessages((prevState) => [
       ...prevState,
-      { id: Math.random(), message: newMessage.message, from: newMessage.from },
+      {
+        id: Math.random(),
+        prefix: newMessage.prefix || null,
+        message: newMessage.message,
+        from: newMessage.from,
+      },
     ]);
   };
 
@@ -80,14 +89,11 @@ function App() {
 
   // Check if there are not more questions
   useEffect(() => {
-    if (questionIndex >= questions.length - 1) {
+    if (questionIndex >= questions.length) {
       const winningHouse = houses.reduce((winningHouse, nextHouse) =>
         winningHouse.score > nextHouse.score ? winningHouse : nextHouse
       );
 
-      console.log("winningHouse", winningHouse);
-
-      setHasFinished(true);
       addMessageHandler({
         id: Math.random(),
         message: "Your house is " + winningHouse.house,
@@ -117,12 +123,14 @@ function App() {
         />
       </Chat>
       <Footer>
-        {!hasAnswered && (
+        {!hasAnswered && !hasFinished && (
           <QuickLinkList
+            questionsLength={questions.length}
             answers={questions[questionIndex].answers}
             hasAnswered={hasAnswered}
             questionIndex={questionIndex}
             updatedHasAnswered={updateHasAnswerHandler}
+            updateHasFinished={updateHasFinished}
             updateQuestionIndex={updateQuestionIndexHandler}
             updateScoreHandler={updateHousesHandler}
             addMessage={addMessageHandler}

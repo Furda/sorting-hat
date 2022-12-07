@@ -16,8 +16,20 @@ const MessageList = (props) => {
       from: "bot",
     });
 
+    // Send game explanation message
+    props.addMessage({
+      id: Math.random(),
+      message:
+        "I am going to ask you a few questions, and you should answer to whatever you think it is the best answer. Once all questions has been answer I will be selecting the most appropriate house for you",
+      from: "bot",
+    });
+
     // Ask for the user name
-    props.addMessage({ message: "What is your name?", from: "bot" });
+    props.addMessage({
+      id: Math.random(),
+      message: "What is your name?",
+      from: "bot",
+    });
   }, [props.hasStarted]);
 
   // show question with answers
@@ -27,13 +39,12 @@ const MessageList = (props) => {
     }
 
     if (props.hasAnswered) {
-      console.log("questionIndex", props.questionIndex);
-      console.log(props.hasFinished);
       // Display question
       const question = props.questions[props.questionIndex];
       let newMessage = {
         id: Math.random(),
-        message: "Question: " + question.title,
+        prefix: "Question:",
+        message: question.title,
         from: "bot",
       };
       props.addMessage(newMessage);
@@ -43,7 +54,8 @@ const MessageList = (props) => {
       question.answers.map((answer) => {
         newMessage = {
           id: Math.random(),
-          message: String.fromCharCode(letterCode) + ". " + answer.title,
+          prefix: String.fromCharCode(letterCode) + ". ",
+          message: answer.title,
           from: "bot",
         };
         letterCode++;
@@ -57,15 +69,19 @@ const MessageList = (props) => {
 
   return (
     <div className={styles.messageList}>
-      {props.messages.map((message) => (
-        <Message
-          key={message.id}
-          from={message.from}
-          delayTimeInSeconds={props.delayTimeInSeconds}
-        >
-          {message.message}
-        </Message>
-      ))}
+      {props.messages.map((message) => {
+        console.log("message", message);
+        return (
+          <Message
+            key={message.id}
+            from={message.from}
+            prefix={message.prefix || ""}
+            delayTimeInSeconds={props.delayTimeInSeconds}
+          >
+            {message.message}
+          </Message>
+        );
+      })}
     </div>
   );
 };
