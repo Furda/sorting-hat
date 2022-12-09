@@ -69,6 +69,11 @@ code {
 @media (max-width: 576px) {
   body {
     margin: 0;
+    justify-content: flex-start;
+    height: 90vh;
+  }
+  .App {
+    border-radius: 0;
   }
 }
 
