@@ -44,7 +44,7 @@ function App() {
     setHasAnswer(updatedHasAnswer);
   };
 
-  const updateHasFinished = (updateHasFinished) => {
+  const updateHasFinishedHandler = (updateHasFinished) => {
     setHasFinished(updateHasFinished);
   };
 
@@ -130,7 +130,7 @@ function App() {
             hasAnswered={hasAnswered}
             questionIndex={questionIndex}
             updatedHasAnswered={updateHasAnswerHandler}
-            updateHasFinished={updateHasFinished}
+            updateHasFinished={updateHasFinishedHandler}
             updateQuestionIndex={updateQuestionIndexHandler}
             updateScoreHandler={updateHousesHandler}
             addMessage={addMessageHandler}
@@ -138,7 +138,9 @@ function App() {
             delayTimeInSeconds={DELAY_TIME_IN_SECONDS}
           />
         )}
-        <Input placeholder="Message" onSend={sendInputMessageHnadler} />
+        {hasStarted || (
+          <Input placeholder="Message" onSend={sendInputMessageHnadler} />
+        )}
       </Footer>
     </div>
   );
