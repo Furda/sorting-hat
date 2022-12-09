@@ -1,4 +1,4 @@
-# The Sorting Hat Chatbot?
+# The Sorting Hat Chatbot
 
 The sorting hat chatbot is will ask you a few questions to determine what is the house that best fit you. The available houses are Gryffindor, Hufflepuff, Ravenclaw, and Slytherin.
 
