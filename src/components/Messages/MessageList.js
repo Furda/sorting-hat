@@ -12,7 +12,7 @@ const MessageList = (props) => {
     // Send greeting messages
     props.addMessage({
       id: Math.random(),
-      message: "Welcome to the Sorting hat project!",
+      message: "Welcome to the Sorting hat chatbot!",
       from: "bot",
     });
 
