@@ -6,7 +6,8 @@ import styles from "./Input.module.css";
 const Input = (props) => {
   const inputRef = useRef(null);
 
-  const onSendHandler = () => {
+  const onSendHandler = (e) => {
+    e.preventDefault();
     if (inputRef.current.value === "") {
       // show error message
       alert("Please enter a valid name");
@@ -20,17 +21,17 @@ const Input = (props) => {
   };
 
   return (
-    <div className={styles.inputContainer}>
+    <form className={styles.inputContainer} onSubmit={onSendHandler}>
       <input
         ref={inputRef}
         className={styles.input}
         placeholder={props.placeholder}
         autoFocus
       ></input>
-      <div className={styles.sendIconConteiner} onClick={onSendHandler}>
+      <button type="submit" className={styles.sendIconConteiner}>
         <FontAwesomeIcon className={styles.sendIcon} icon={faPaperPlane} />
-      </div>
-    </div>
+      </button>
+    </form>
   );
 };
 

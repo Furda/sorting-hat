@@ -4,7 +4,6 @@ import styles from "./QuickLinkList.module.css";
 
 const QuickLinkList = (props) => {
   const [answerOptions, setAnswerOptions] = useState([]);
-  const [delayed, setDelayed] = useState(true);
 
   const addAnswerOption = (newAswerOption) => {
     setAnswerOptions((prevState) => [...prevState, newAswerOption]);
@@ -28,16 +27,6 @@ const QuickLinkList = (props) => {
     props.updateQuestionIndex();
   };
 
-  // Delayed showing the message to create the illusion of messaging
-  useEffect(() => {
-    const timeout = setTimeout(
-      () => setDelayed(false),
-      props.delayTimeInSeconds * 1000
-    );
-    return () => clearTimeout(timeout);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
   // Show answer options
   useEffect(() => {
     let letterCode = 65; // (65 = A) not using state because it is too slow in updating the state
@@ -51,20 +40,19 @@ const QuickLinkList = (props) => {
   }, [props.answers]);
 
   return (
-    delayed || (
-      <div className={styles.quickLinkList}>
-        {answerOptions.map((answer, index) => (
-          <QuickLink
-            key={index}
-            onClick={() => {
-              quickLinkOnclickHandler(props.answers[answer.index], index);
-            }}
-          >
-            {answer.letter}
-          </QuickLink>
-        ))}
-      </div>
-    )
+    <div className={styles.quickLinkList}>
+      {answerOptions.map((answer, index) => (
+        <QuickLink
+          key={index}
+          onClick={() => {
+            quickLinkOnclickHandler(props.answers[answer.index], index);
+          }}
+          delayTimeInSeconds={props.delayTimeInSeconds}
+        >
+          {answer.letter}
+        </QuickLink>
+      ))}
+    </div>
   );
 };
 

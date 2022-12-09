@@ -1,3 +1,12 @@
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 100%;
+  }
+}
+
 .quickLink {
   display: flex;
   background-color: #00a3ff;
@@ -8,6 +17,7 @@
   cursor: pointer;
   border: 0;
   color: #fff;
+  animation: 0.2s ease-in 0s 1 fadeIn;
 }
 
 .quickLink:hover {

@@ -5,6 +5,7 @@ import Chat from "./components/Chat/Chat";
 import Input from "./components/Input/Input";
 import MessageList from "./components/Messages/MessageList";
 import QuickLinkList from "./components/QuickLinks/QuickLinkList";
+import QuickLink from "./components/QuickLinks/QuickLink";
 import Footer from "./components/utils/Footer/Footer";
 import ScoreList from "./components/Scores/ScoreList";
 import "./App.css";
@@ -87,6 +88,33 @@ function App() {
     }
   };
 
+  const playAgainQuickLinkHandler = () => {
+    // Reset states
+    setMessages([]);
+    setQuestionIndex(0);
+    setHasStarted(false);
+    setHasAnswer(true);
+    setHasFinished(false);
+    setHouses([
+      {
+        house: "Griffyndor",
+        score: 0,
+      },
+      {
+        house: "Hufflepuff",
+        score: 0,
+      },
+      {
+        house: "Ravenclaw",
+        score: 0,
+      },
+      {
+        house: "Slytherin",
+        score: 0,
+      },
+    ]);
+  };
+
   // Check if there are not more questions
   useEffect(() => {
     if (questionIndex >= questions.length) {
@@ -128,6 +156,7 @@ function App() {
             questionsLength={questions.length}
             answers={questions[questionIndex].answers}
             hasAnswered={hasAnswered}
+            hasFinished={hasFinished}
             questionIndex={questionIndex}
             updatedHasAnswered={updateHasAnswerHandler}
             updateHasFinished={updateHasFinishedHandler}
@@ -138,6 +167,17 @@ function App() {
             delayTimeInSeconds={DELAY_TIME_IN_SECONDS}
           />
         )}
+
+        {hasFinished && (
+          <QuickLink
+            key={Math.random()}
+            onClick={playAgainQuickLinkHandler}
+            delayTimeInSeconds={DELAY_TIME_IN_SECONDS}
+          >
+            Play Again
+          </QuickLink>
+        )}
+
         {hasStarted || (
           <Input placeholder="Message" onSend={sendInputMessageHnadler} />
         )}
