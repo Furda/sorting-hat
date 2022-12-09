@@ -24,7 +24,7 @@ function App() {
   const [messages, setMessages] = useState([]);
   const [houses, setHouses] = useState([
     {
-      house: "Griffyndor",
+      house: "Gryffindor",
       score: 0,
     },
     {
@@ -97,7 +97,7 @@ function App() {
     setHasFinished(false);
     setHouses([
       {
-        house: "Griffyndor",
+        house: "Gryffindor",
         score: 0,
       },
       {
