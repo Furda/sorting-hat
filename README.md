@@ -6,9 +6,16 @@ The sorting hat chatbot is will ask you a few questions to determine what is the
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Clone the repository
+Go to [GitHub Documentation](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository) on how to clone a repository for more details.
+
 ## Available Scripts
 
 In the project directory, you can run:
+
+### `npm install`
+
+Install all the project dependecies.
 
 ### `npm start`
 
