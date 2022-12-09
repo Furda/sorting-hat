@@ -1,7 +1,7 @@
 .quickLink {
   display: flex;
   background-color: #00a3ff;
-  padding: 1rem 2rem;
+  padding: 0.5rem 1rem;
   border-radius: 8px;
   justify-content: center;
   font-size: 1.5rem;
